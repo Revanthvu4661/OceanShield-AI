@@ -1,5 +1,6 @@
 const MAX_MARKERS = 20;
 let map;
+let coordOverlay;
 const markers = [];
 
 function riskColor(level) {
@@ -19,11 +20,50 @@ export function initMap() {
   window.L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     attribution: "&copy; OpenStreetMap &copy; CARTO",
   }).addTo(map);
+  map.getContainer().style.cursor = "crosshair";
+  attachCursorOverlay();
   window.setTimeout(() => map?.invalidateSize?.(), 150);
   window.addEventListener("resize", () => {
     if (map) map.invalidateSize();
   }, { passive: true });
   return map;
+}
+
+function attachCursorOverlay() {
+  if (!map || coordOverlay) return;
+  const container = map.getContainer();
+  container.style.position = "relative";
+
+  coordOverlay = window.L.DomUtil.create("div", "map-coordinates-overlay", container);
+  coordOverlay.innerHTML = `
+    <div class="map-crosshair map-crosshair-x"></div>
+    <div class="map-crosshair map-crosshair-y"></div>
+    <div class="map-coordinate-pill">Move cursor over the map</div>
+  `;
+
+  const crosshairX = coordOverlay.querySelector(".map-crosshair-x");
+  const crosshairY = coordOverlay.querySelector(".map-crosshair-y");
+  const pill = coordOverlay.querySelector(".map-coordinate-pill");
+
+  const updatePosition = (event) => {
+    const point = map.latLngToContainerPoint(event.latlng);
+    crosshairX.style.left = `${point.x}px`;
+    crosshairY.style.top = `${point.y}px`;
+    pill.textContent = `Lat ${event.latlng.lat.toFixed(4)} | Lon ${event.latlng.lng.toFixed(4)}`;
+    coordOverlay.classList.add("visible");
+  };
+
+  const hidePosition = () => {
+    coordOverlay.classList.remove("visible");
+  };
+
+  map.on("mousemove", updatePosition);
+  map.on("mouseout", hidePosition);
+  map.on("zoom", () => {
+    if (coordOverlay.classList.contains("visible")) {
+      coordOverlay.classList.remove("visible");
+    }
+  });
 }
 
 export function addRiskMarker(lat, lon, riskScore, riskLevel, topFactor) {

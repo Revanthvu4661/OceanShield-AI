@@ -280,6 +280,54 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
+.map-coordinates-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  z-index: 500;
+}
+
+.map-coordinates-overlay.visible {
+  opacity: 1;
+}
+
+.map-crosshair {
+  position: absolute;
+  background: rgba(144, 224, 239, 0.65);
+  box-shadow: 0 0 0 1px rgba(10, 22, 40, 0.65), 0 0 12px rgba(0, 180, 216, 0.35);
+}
+
+.map-crosshair-x {
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-0.5px);
+}
+
+.map-crosshair-y {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-0.5px);
+}
+
+.map-coordinate-pill {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(6, 18, 32, 0.88);
+  border: 1px solid rgba(144, 224, 239, 0.22);
+  color: var(--ocean-foam);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(8px);
+}
+
 .gauge-panel.high-risk {
   animation: pulse-red 1.6s infinite;
   border-color: rgba(255,71,87,0.5);
