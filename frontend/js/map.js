@@ -11,10 +11,18 @@ function riskColor(level) {
 export function initMap() {
   if (!window.L) return null;
   if (map) return map;
-  map = window.L.map("riskMap", { zoomControl: true }).setView([20, 72], 3);
+  map = window.L.map("riskMap", {
+    zoomControl: true,
+    worldCopyJump: true,
+    preferCanvas: true,
+  }).setView([18, 0], 2);
   window.L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     attribution: "&copy; OpenStreetMap &copy; CARTO",
   }).addTo(map);
+  window.setTimeout(() => map?.invalidateSize?.(), 150);
+  window.addEventListener("resize", () => {
+    if (map) map.invalidateSize();
+  }, { passive: true });
   return map;
 }
 
@@ -41,7 +49,6 @@ export function addRiskMarker(lat, lon, riskScore, riskLevel, topFactor) {
     map.removeLayer(oldest);
   }
   if (lat || lon) {
-    map.setView([lat || 0, lon || 0], 6, { animate: true });
+    map.flyTo([lat || 0, lon || 0], 3, { animate: true, duration: 0.8 });
   }
 }
-
