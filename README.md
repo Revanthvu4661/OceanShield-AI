@@ -42,3 +42,6 @@ docker compose up --build
 
 The app will be available at `http://localhost:8000`.
 
+## Render Deployment
+
+Use the root `Dockerfile` and set the service to listen on the platform-provided `PORT` environment variable. Render will automatically provide `PORT` for the web service.
