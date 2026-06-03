@@ -1,5 +1,4 @@
 let factorChart;
-let importanceChart;
 
 function asPct(value) {
   return `${(value * 100).toFixed(2)}%`;
@@ -80,31 +79,3 @@ export function renderHistoryFeed(predictions = []) {
     </article>
   `).join("");
 }
-
-export function renderImportanceChart(health) {
-  const ctx = document.getElementById("importanceChart");
-  if (!ctx || !window.Chart) return;
-  const rows = health.top_feature_importance.slice(0, 10);
-  if (importanceChart) importanceChart.destroy();
-  importanceChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: rows.map((row) => row.feature),
-      datasets: [{
-        label: "Importance",
-        data: rows.map((row) => row.importance),
-        backgroundColor: "rgba(144,224,239,0.75)",
-        borderRadius: 8,
-      }],
-    },
-    options: {
-      indexAxis: "y",
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: "#caf0f8" }, grid: { display: false } },
-        y: { ticks: { color: "#caf0f8" }, grid: { display: false } },
-      },
-    },
-  });
-}
-

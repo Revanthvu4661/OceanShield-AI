@@ -1,5 +1,5 @@
 import { initMap, addRiskMarker } from "./map.js";
-import { renderFactorsChart, renderHistoryFeed, renderImportanceChart, renderMetricCards } from "./dashboard.js";
+import { renderFactorsChart, renderHistoryFeed, renderMetricCards } from "./dashboard.js";
 import { initAiSearch } from "./ai_search.js";
 
 const state = {
@@ -82,7 +82,6 @@ function updateGauge(score, level) {
 function updateHeader(health) {
   $("healthPill").textContent = `${health.model} | Acc ${(health.accuracy * 100).toFixed(2)}%`;
   renderMetricCards(health);
-  renderImportanceChart(health);
 }
 
 function fillScenario(values) {

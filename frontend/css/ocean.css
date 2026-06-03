@@ -318,7 +318,7 @@ a { color: inherit; text-decoration: none; }
   color: rgba(202, 240, 248, 0.92);
 }
 
-#factorsChart, #importanceChart {
+#factorsChart {
   width: 100% !important;
   background: transparent;
 }
