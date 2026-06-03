@@ -1,0 +1,194 @@
+{
+  "model_shape": {
+    "rows": 19680,
+    "cols": 44
+  },
+  "top_correlations_with_proxy": {
+    "swellheight": 0.864,
+    "sigheight": 0.805,
+    "windspeed": 0.6987,
+    "windgust": 0.5587,
+    "period": 0.4716,
+    "moon_illumination": 0.3457,
+    "swelldir": 0.2326,
+    "maxtemp": -0.2296,
+    "feelslike": -0.2052,
+    "windchill": -0.2034
+  },
+  "top_correlations_with_sigheight": {
+    "risk_proxy_score": 0.805,
+    "swellheight": 0.5677,
+    "windspeed": 0.5039,
+    "windgust": 0.3649,
+    "moon_illumination": 0.2447,
+    "watertemp": -0.2372,
+    "maxtemp": -0.1732,
+    "pressure": -0.1466,
+    "windchill": -0.1296,
+    "feelslike": -0.1277
+  },
+  "top_correlations_with_swellheight": {
+    "risk_proxy_score": 0.864,
+    "sigheight": 0.5677,
+    "windspeed": 0.5502,
+    "windgust": 0.4074,
+    "period": 0.3393,
+    "moon_illumination": 0.3007,
+    "swelldir": 0.2287,
+    "maxtemp": -0.1242,
+    "pressure": -0.1217,
+    "tide_height_mean": -0.1183
+  },
+  "top_correlations_with_period": {
+    "swelldir": 0.5783,
+    "risk_proxy_score": 0.4716,
+    "mintemp": -0.4281,
+    "dewpoint": -0.4019,
+    "moon_illumination": 0.3436,
+    "swellheight": 0.3393,
+    "temperature": -0.3231,
+    "windchill": -0.3165,
+    "feelslike": -0.3144,
+    "heatIndex": -0.313
+  },
+  "outliers": [
+    {
+      "feature": "windspeed",
+      "q1": 12.0,
+      "q3": 22.0,
+      "iqr": 10.0,
+      "lower_bound": -3.0,
+      "upper_bound": 37.0,
+      "outlier_count": 231,
+      "outlier_pct": 1.17
+    },
+    {
+      "feature": "windgust",
+      "q1": 24.0,
+      "q3": 38.0,
+      "iqr": 14.0,
+      "lower_bound": 3.0,
+      "upper_bound": 59.0,
+      "outlier_count": 14,
+      "outlier_pct": 0.07
+    },
+    {
+      "feature": "precipitation",
+      "q1": 0.0,
+      "q3": 0.1,
+      "iqr": 0.1,
+      "lower_bound": -0.15,
+      "upper_bound": 0.25,
+      "outlier_count": 3317,
+      "outlier_pct": 16.85
+    },
+    {
+      "feature": "pressure",
+      "q1": 1015.0,
+      "q3": 1020.0,
+      "iqr": 5.0,
+      "lower_bound": 1007.5,
+      "upper_bound": 1027.5,
+      "outlier_count": 336,
+      "outlier_pct": 1.71
+    },
+    {
+      "feature": "sigheight",
+      "q1": 0.6,
+      "q3": 0.8,
+      "iqr": 0.2,
+      "lower_bound": 0.3,
+      "upper_bound": 1.1,
+      "outlier_count": 1617,
+      "outlier_pct": 8.22
+    },
+    {
+      "feature": "swellheight",
+      "q1": 0.6,
+      "q3": 0.8,
+      "iqr": 0.2,
+      "lower_bound": 0.3,
+      "upper_bound": 1.1,
+      "outlier_count": 1302,
+      "outlier_pct": 6.62
+    },
+    {
+      "feature": "period",
+      "q1": 6.5,
+      "q3": 9.4,
+      "iqr": 2.9,
+      "lower_bound": 2.15,
+      "upper_bound": 13.75,
+      "outlier_count": 679,
+      "outlier_pct": 3.45
+    },
+    {
+      "feature": "watertemp",
+      "q1": 20.0,
+      "q3": 25.0,
+      "iqr": 5.0,
+      "lower_bound": 12.5,
+      "upper_bound": 32.5,
+      "outlier_count": 168,
+      "outlier_pct": 0.85
+    }
+  ],
+  "beach_summary": [
+    {
+      "beach_name": "Barra da Lagoa",
+      "sigheight": 0.739,
+      "swellheight": 0.704,
+      "period": 8.226,
+      "windspeed": 17.468,
+      "risk_proxy_score": 0.001
+    },
+    {
+      "beach_name": "Brava",
+      "sigheight": 0.739,
+      "swellheight": 0.704,
+      "period": 8.231,
+      "windspeed": 17.417,
+      "risk_proxy_score": -0.0
+    },
+    {
+      "beach_name": "Campeche",
+      "sigheight": 0.739,
+      "swellheight": 0.704,
+      "period": 8.231,
+      "windspeed": 17.417,
+      "risk_proxy_score": -0.0
+    },
+    {
+      "beach_name": "Ingleses",
+      "sigheight": 0.739,
+      "swellheight": 0.704,
+      "period": 8.231,
+      "windspeed": 17.417,
+      "risk_proxy_score": -0.0
+    },
+    {
+      "beach_name": "Joaquina",
+      "sigheight": 0.739,
+      "swellheight": 0.704,
+      "period": 8.231,
+      "windspeed": 17.417,
+      "risk_proxy_score": -0.0
+    },
+    {
+      "beach_name": "Mole",
+      "sigheight": 0.739,
+      "swellheight": 0.704,
+      "period": 8.231,
+      "windspeed": 17.417,
+      "risk_proxy_score": -0.0
+    },
+    {
+      "beach_name": "Santinho",
+      "sigheight": 0.739,
+      "swellheight": 0.704,
+      "period": 8.231,
+      "windspeed": 17.417,
+      "risk_proxy_score": -0.0
+    }
+  ]
+}

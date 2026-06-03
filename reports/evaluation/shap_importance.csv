@@ -1,0 +1,72 @@
+feature,mean_abs_shap
+wave_severity,2.3464646
+swellheight,1.6500083
+marine_risk_index,1.5990785
+windspeed,1.0119497
+sigheight,0.98294085
+wave_energy,0.9412355
+humidity,0.5039643
+wave_power_index,0.36404735
+wave_wind_interaction,0.36106342
+period,0.3284299
+gust_factor,0.23809609
+hour_sin,0.17968878
+swell_energy,0.1371626
+cloud_humidity_interaction,0.10811322
+dewpoint_depression,0.08467601
+wind_vector_x,0.0837606
+winddirdegree,0.08181548
+swelldir,0.060401846
+lunar_energy_proxy,0.059410628
+wave_steepness,0.044725645
+pressure,0.044274688
+daily_temp_range,0.04006924
+wind_intensity,0.03603384
+swell_vector_x,0.033676133
+windgust,0.032229066
+cloudcover,0.028263088
+swell_ratio,0.024855312
+gust_delta,0.02153335
+dewpoint,0.019242072
+hour_cos,0.017962806
+pressure_anomaly,0.013940829
+tide_height_normalized,0.0131402295
+wind_vector_y,0.0119726565
+directional_misalignment,0.0102650495
+tide_height_mean,0.010081998
+maxtemp,0.009553447
+temperature_vs_daily_min,0.008960948
+swell_vector_y,0.008422043
+temperature_vs_daily_max,0.0058221053
+precipitation,0.0049188654
+tide_height_range,0.0046253596
+precipitation_log,0.003887904
+watertemp,0.0015662826
+daylight_flag,0.00043894647
+low_tide_count,0.00018776658
+moon_phase_Waxing Crescent,0.0
+moon_phase_Waxing Gibbous,0.0
+moon_phase___unknown__,0.0
+moon_phase_Waning Gibbous,0.0
+moon_phase_First Quarter,0.0
+idbeach_371,0.0
+idbeach_373,0.0
+idbeach_372,0.0
+idbeach___unknown__,0.0
+idbeach_374,0.0
+high_tide_count,0.0
+idbeach_370,0.0
+idbeach_368,0.0
+idbeach_369,0.0
+moon_phase_Waning Crescent,0.0
+moon_phase_Full Moon,0.0
+moon_phase_Last Quarter,0.0
+moon_phase_New Moon,0.0
+moon_illumination,0.0
+mintemp,0.0
+tide_events,0.0
+pressure_drop_flag,0.0
+tide_height_max,0.0
+tide_extreme_imbalance,0.0
+tide_height_min,0.0
+wind_alignment,0.0

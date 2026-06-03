@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local dependencies and runtime artifacts
+.python_pkgs/
+backend/server.out.log
+backend/server.err.log
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Node / frontend tooling
+node_modules/
+dist/
+build/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+

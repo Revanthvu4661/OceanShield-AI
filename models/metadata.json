@@ -1,0 +1,308 @@
+{
+  "project_name": "RogueGuard \u2013 Rogue Wave Risk Prediction",
+  "best_model": "XGBoost",
+  "performance_metrics": {
+    "accuracy": 0.9927536231884058,
+    "precision": 0.9743589743589743,
+    "recall": 0.926829268292683,
+    "f1": 0.95,
+    "roc_auc": 0.9991885828838719
+  },
+  "confusion_matrix": {
+    "tn": 3570,
+    "fp": 7,
+    "fn": 21,
+    "tp": 266
+  },
+  "precision_recall_auc": 0.9903610671796086,
+  "roc_auc_curve": 0.9991885828838719,
+  "top_feature_importance": [
+    {
+      "feature": "wave_severity",
+      "importance": 0.5189077854156494
+    },
+    {
+      "feature": "swelldir",
+      "importance": 0.12194444239139557
+    },
+    {
+      "feature": "marine_risk_index",
+      "importance": 0.058268290013074875
+    },
+    {
+      "feature": "low_tide_count",
+      "importance": 0.04579280689358711
+    },
+    {
+      "feature": "wave_energy",
+      "importance": 0.02348531037569046
+    },
+    {
+      "feature": "daily_temp_range",
+      "importance": 0.02057395502924919
+    },
+    {
+      "feature": "wave_wind_interaction",
+      "importance": 0.019113244488835335
+    },
+    {
+      "feature": "precipitation",
+      "importance": 0.018728777766227722
+    },
+    {
+      "feature": "swellheight",
+      "importance": 0.018604328855872154
+    },
+    {
+      "feature": "wave_steepness",
+      "importance": 0.016801869496703148
+    },
+    {
+      "feature": "temperature_vs_daily_min",
+      "importance": 0.015584234148263931
+    },
+    {
+      "feature": "pressure",
+      "importance": 0.014712797477841377
+    },
+    {
+      "feature": "precipitation_log",
+      "importance": 0.011338070034980774
+    },
+    {
+      "feature": "swell_ratio",
+      "importance": 0.009469442069530487
+    },
+    {
+      "feature": "wind_vector_x",
+      "importance": 0.006364496890455484
+    },
+    {
+      "feature": "wind_intensity",
+      "importance": 0.005698483902961016
+    },
+    {
+      "feature": "lunar_energy_proxy",
+      "importance": 0.005174589343369007
+    },
+    {
+      "feature": "hour_sin",
+      "importance": 0.005084787495434284
+    },
+    {
+      "feature": "windgust",
+      "importance": 0.0050809672102332115
+    },
+    {
+      "feature": "cloud_humidity_interaction",
+      "importance": 0.004975061863660812
+    }
+  ],
+  "top_shap_features": [
+    {
+      "feature": "wave_severity",
+      "mean_abs_shap": 2.3464646339416504
+    },
+    {
+      "feature": "swellheight",
+      "mean_abs_shap": 1.6500083208084106
+    },
+    {
+      "feature": "marine_risk_index",
+      "mean_abs_shap": 1.5990785360336304
+    },
+    {
+      "feature": "windspeed",
+      "mean_abs_shap": 1.0119496583938599
+    },
+    {
+      "feature": "sigheight",
+      "mean_abs_shap": 0.9829408526420593
+    },
+    {
+      "feature": "wave_energy",
+      "mean_abs_shap": 0.9412354826927185
+    },
+    {
+      "feature": "humidity",
+      "mean_abs_shap": 0.5039643049240112
+    },
+    {
+      "feature": "wave_power_index",
+      "mean_abs_shap": 0.3640473484992981
+    },
+    {
+      "feature": "wave_wind_interaction",
+      "mean_abs_shap": 0.3610634207725525
+    },
+    {
+      "feature": "period",
+      "mean_abs_shap": 0.3284299075603485
+    },
+    {
+      "feature": "gust_factor",
+      "mean_abs_shap": 0.23809608817100525
+    },
+    {
+      "feature": "hour_sin",
+      "mean_abs_shap": 0.17968878149986267
+    },
+    {
+      "feature": "swell_energy",
+      "mean_abs_shap": 0.13716259598731995
+    },
+    {
+      "feature": "cloud_humidity_interaction",
+      "mean_abs_shap": 0.10811322182416916
+    },
+    {
+      "feature": "dewpoint_depression",
+      "mean_abs_shap": 0.08467601239681244
+    },
+    {
+      "feature": "wind_vector_x",
+      "mean_abs_shap": 0.08376059681177139
+    },
+    {
+      "feature": "winddirdegree",
+      "mean_abs_shap": 0.08181548118591309
+    },
+    {
+      "feature": "swelldir",
+      "mean_abs_shap": 0.06040184572339058
+    },
+    {
+      "feature": "lunar_energy_proxy",
+      "mean_abs_shap": 0.05941062793135643
+    },
+    {
+      "feature": "wave_steepness",
+      "mean_abs_shap": 0.04472564533352852
+    }
+  ],
+  "inference_example": {
+    "example_index": 3205,
+    "predicted_probability": 0.9999427795410156,
+    "predicted_label": 1,
+    "true_label": 1,
+    "top_features": {
+      "wave_severity": 1.8112,
+      "swelldir": -0.34,
+      "marine_risk_index": 2.3119,
+      "low_tide_count": 0.0,
+      "wave_energy": 2.099,
+      "daily_temp_range": -2.0,
+      "wave_wind_interaction": 3.0627,
+      "precipitation": 2.0
+    }
+  },
+  "training_metadata": {
+    "split_metadata": {
+      "split_strategy": "chronological",
+      "train_end_date": "2020-06-14",
+      "test_start_date": "2020-06-15",
+      "train_unique_dates": 90,
+      "test_unique_dates": 23,
+      "target_column": "rogue_risk_label",
+      "train_rows": 15816,
+      "test_rows": 3864,
+      "train_positive_rate": 0.05045523520485584,
+      "test_positive_rate": 0.07427536231884058,
+      "feature_count": 71,
+      "categorical_columns": [
+        "moon_phase",
+        "idbeach"
+      ],
+      "numeric_columns": [
+        "windspeed",
+        "winddirdegree",
+        "precipitation",
+        "humidity",
+        "pressure",
+        "cloudcover",
+        "dewpoint",
+        "windgust",
+        "sigheight",
+        "swellheight",
+        "swelldir",
+        "period",
+        "watertemp",
+        "moon_illumination",
+        "maxtemp",
+        "mintemp",
+        "tide_events",
+        "tide_height_mean",
+        "tide_height_max",
+        "tide_height_min",
+        "tide_height_range",
+        "high_tide_count",
+        "low_tide_count",
+        "hour_sin",
+        "hour_cos",
+        "daylight_flag",
+        "daily_temp_range",
+        "temperature_vs_daily_max",
+        "temperature_vs_daily_min",
+        "dewpoint_depression",
+        "precipitation_log",
+        "cloud_humidity_interaction",
+        "wind_vector_x",
+        "wind_vector_y",
+        "swell_vector_x",
+        "swell_vector_y",
+        "directional_misalignment",
+        "wind_alignment",
+        "gust_factor",
+        "gust_delta",
+        "wind_intensity",
+        "wave_energy",
+        "wave_steepness",
+        "wave_power_index",
+        "swell_ratio",
+        "swell_energy",
+        "wave_severity",
+        "wave_wind_interaction",
+        "pressure_anomaly",
+        "pressure_drop_flag",
+        "lunar_energy_proxy",
+        "tide_height_normalized",
+        "tide_extreme_imbalance",
+        "marine_risk_index"
+      ],
+      "excluded_columns": [
+        "date",
+        "hour",
+        "period_flag",
+        "rogue_risk_label",
+        "rogue_risk_score",
+        "sigheight_flag",
+        "swellheight_flag",
+        "threshold_hit_count",
+        "time",
+        "windspeed_flag"
+      ],
+      "remaining_nulls_after_transform_train": 0,
+      "remaining_nulls_after_transform_test": 0
+    },
+    "target_column": "rogue_risk_label",
+    "scale_pos_weight": 18.81954887218045,
+    "feature_count": 71,
+    "train_positive_count": 798,
+    "train_negative_count": 15018
+  },
+  "artifacts": {
+    "confusion_matrix": "D:\\ocean\\reports\\evaluation\\confusion_matrix.png",
+    "roc_curve": "D:\\ocean\\reports\\evaluation\\roc_curve.png",
+    "precision_recall_curve": "D:\\ocean\\reports\\evaluation\\precision_recall_curve.png",
+    "feature_importance_csv": "D:\\ocean\\reports\\evaluation\\feature_importance.csv",
+    "shap_importance_csv": "D:\\ocean\\reports\\evaluation\\shap_importance.csv",
+    "shap_summary": "D:\\ocean\\reports\\evaluation\\shap_summary.png",
+    "model_pickle": "D:\\ocean\\models\\rogue_model.pkl"
+  },
+  "handoff_notes": [
+    "This model predicts a proxy rogue-risk label, not confirmed rogue-wave events.",
+    "Inference must apply the same engineered-feature and preprocessing logic used in training.",
+    "The training split is chronological; future validation should preserve temporal ordering.",
+    "If the team collects verified incident labels later, retraining against real events should take priority over tuning this proxy target."
+  ]
+}
