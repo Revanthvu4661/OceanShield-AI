@@ -75,6 +75,13 @@ def _resolve_port(place: str) -> tuple[str, float, float]:
     )
 
 
+def _is_route_endpoint(place: str) -> bool:
+    normalized = _normalize_name(place)
+    if re.fullmatch(r"-?\d+(?:\.\d+)?\s*,\s*-?\d+(?:\.\d+)?", place.strip()):
+        return True
+    return normalized in PORT_DIRECTORY
+
+
 def _moon_phase_from_illumination(illumination: float) -> str:
     if illumination < 12:
         return "New Moon"
@@ -275,13 +282,32 @@ def suggest_alternative_route(start: str, end: str, risk_threshold: float = 65.0
 
 
 def _extract_route_pair(query: str) -> tuple[str, str] | None:
-    route_match = re.search(r"route\s+(.+?)\s+to\s+(.+?)(?:\?|$)", query, re.I)
-    if route_match:
-        return route_match.group(1).strip(), route_match.group(2).strip()
+    patterns = [
+        r"(?:route|route\s+advice|route\s+check|voyage|sailing|passage|shipping\s+lane)\s+(.+?)\s+to\s+(.+?)(?:\?|$)",
+        r"from\s+(.+?)\s+to\s+(.+?)(?:\s+safe|\s+dangerous|\s+this\s+week|\?|$)",
+        r"(.+?)\s+to\s+(.+?)(?:\s+safe|\s+dangerous|\s+this\s+week|\?|$)",
+    ]
+    for pattern in patterns:
+        route_match = re.search(pattern, query, re.I)
+        if not route_match:
+            continue
+        start = route_match.group(1).strip(" ,.?")
+        end = route_match.group(2).strip(" ,.?")
+        if _is_route_endpoint(start) and _is_route_endpoint(end):
+            return start, end
 
-    route_match = re.search(r"(.+?)\s+to\s+(.+?)(?:\s+safe|\s+dangerous|\?|$)", query, re.I)
-    if route_match:
-        return route_match.group(1).strip(), route_match.group(2).strip()
+    normalized_query = _normalize_name(query)
+    if " to " in normalized_query:
+        port_hits: list[tuple[int, str]] = []
+        for port_name in PORT_DIRECTORY:
+            match = re.search(rf"\b{re.escape(port_name)}\b", normalized_query)
+            if match:
+                port_hits.append((match.start(), port_name.title()))
+        port_hits.sort(key=lambda item: item[0])
+        if len(port_hits) >= 2:
+            start = port_hits[0][1]
+            end = port_hits[1][1]
+            return start, end
 
     return None
 
