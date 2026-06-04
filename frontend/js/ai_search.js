@@ -1,11 +1,9 @@
-const SESSION_KEY = "oceanshield_gemini_key";
-
 function typeText(el, text) {
   el.innerHTML = "";
   const textNode = document.createTextNode("");
   const cursor = document.createElement("span");
   cursor.className = "typing-cursor";
-  cursor.textContent = "▍";
+  cursor.textContent = "|";
   el.appendChild(textNode);
   el.appendChild(cursor);
 
@@ -24,10 +22,48 @@ function typeText(el, text) {
 function renderAnswer(target, data) {
   const points = data.key_points || [];
   const factors = data.risk_factors || [];
+  const routeAdvice = data.route_advice;
+  const routeTable = routeAdvice
+    ? `
+      <div class="route-advice">
+        <h4>Route Advisory</h4>
+        <div class="route-summary">${routeAdvice.route_summary}</div>
+        <div class="route-meta">
+          <span>Recommended: ${routeAdvice.recommended_route}</span>
+          <span>Threshold: ${routeAdvice.risk_threshold}</span>
+        </div>
+        <div class="route-table-wrap">
+          <table class="route-table">
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Avg Risk</th>
+                <th>Peak Risk</th>
+                <th>High-Risk Waypoints</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${(routeAdvice.comparison_table || []).map((row) => `
+                <tr>
+                  <td>${row.route}</td>
+                  <td>${Number(row.average_risk_score).toFixed(2)}</td>
+                  <td>${Number(row.peak_risk_score).toFixed(2)}</td>
+                  <td>${row.high_risk_waypoints}</td>
+                  <td><span class="badge ${row.status === "HIGH RISK" ? "high" : row.status === "ELEVATED" ? "elevated" : "safe"}">${row.status}</span></td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `
+    : "";
 
   target.innerHTML = `
     <h4>Answer</h4>
     <div class="ai-answer-text"></div>
+    ${routeTable}
     <h4>Key Points</h4>
     <ul>${points.length ? points.map((p) => `<li>${p}</li>`).join("") : "<li>No key points returned.</li>"}</ul>
     <h4>Risk Factors</h4>
@@ -44,12 +80,8 @@ function renderAnswer(target, data) {
 
 export function initAiSearch(showLoading, hideLoading, showToast) {
   const query = document.getElementById("aiQuery");
-  const key = document.getElementById("geminiKey");
   const answer = document.getElementById("aiAnswer");
   const btn = document.getElementById("aiSearchBtn");
-
-  key.value = sessionStorage.getItem(SESSION_KEY) || "";
-  key.addEventListener("change", () => sessionStorage.setItem(SESSION_KEY, key.value));
 
   const chips = document.querySelectorAll("#suggestions .chip");
   chips.forEach((chip) => chip.addEventListener("click", () => {
@@ -59,22 +91,19 @@ export function initAiSearch(showLoading, hideLoading, showToast) {
 
   const runSearch = async () => {
     const queryText = query.value.trim();
-    const apiKey = key.value.trim();
     if (!queryText) return showToast("Please enter a maritime research question.", "info");
-    if (!apiKey) return showToast("Add a Gemini API key to search the ocean knowledge panel.", "info");
-    sessionStorage.setItem(SESSION_KEY, apiKey);
     showLoading("Searching oceanic knowledge...");
     try {
       const response = await fetch("/api/ai-search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: queryText, gemini_api_key: apiKey }),
+        body: JSON.stringify({ query: queryText }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data?.detail?.detail || data?.detail || "Gemini request failed");
       renderAnswer(answer, data);
     } catch (error) {
-      answer.innerHTML = `<div class="empty-state">⚠ Lost signal from the deep — ${error.message}</div>`;
+      answer.innerHTML = `<div class="empty-state">Warning: Lost signal from the deep - ${error.message}</div>`;
       showToast("Lost signal from the deep - check your connection.", "warning");
     } finally {
       hideLoading();
@@ -86,4 +115,3 @@ export function initAiSearch(showLoading, hideLoading, showToast) {
     if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) runSearch();
   });
 }
-

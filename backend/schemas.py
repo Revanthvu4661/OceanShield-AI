@@ -92,7 +92,30 @@ class HealthResponse(BaseModel):
 
 class AISearchRequest(BaseModel):
     query: str = Field(..., min_length=3)
-    gemini_api_key: str = Field(..., min_length=10)
+
+
+class RouteComparisonItem(BaseModel):
+    route: str
+    average_risk_score: float
+    peak_risk_score: float
+    high_risk_waypoints: int
+    status: str
+
+
+class RouteAdvice(BaseModel):
+    start: str
+    end: str
+    risk_threshold: float
+    recommended_route: str
+    route_summary: str
+    comparison_table: list[RouteComparisonItem]
+    alternatives: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class AgentToolTrace(BaseModel):
+    tool_name: str
+    arguments: dict[str, Any]
+    result: dict[str, Any]
 
 
 class AISearchResponse(BaseModel):
@@ -101,4 +124,85 @@ class AISearchResponse(BaseModel):
     risk_factors: list[str]
     sources_note: str
     query: str
+    tool_trace: list[AgentToolTrace] = Field(default_factory=list)
+    route_request: dict[str, Any] | None = None
+    route_advice: RouteAdvice | None = None
 
+
+class BackgroundSnapshotItem(BaseModel):
+    snapshot_id: int
+    run_id: str
+    collected_at: str
+    source: str
+    station_name: str
+    latitude: float
+    longitude: float
+    risk_score: float
+    risk_level: str
+    probability: float
+    top_factor: str
+    conditions: dict[str, Any]
+    risk: dict[str, Any]
+
+
+class BackgroundRunSummary(BaseModel):
+    run_id: str
+    created_at: str
+    trigger_source: str
+    status: str
+    summary: dict[str, Any]
+
+
+class BackgroundAnomalyItem(BaseModel):
+    anomaly_id: int
+    run_id: str
+    snapshot_id: int
+    detected_at: str
+    station_name: str
+    anomaly_type: str
+    severity: str
+    baseline_value: float
+    current_value: float
+    delta: float
+    rule: str
+    details: dict[str, Any]
+
+
+class BackgroundStatusResponse(BaseModel):
+    latest_run: BackgroundRunSummary | None = None
+    recent_snapshots: list[BackgroundSnapshotItem] = Field(default_factory=list)
+    recent_anomalies: list[BackgroundAnomalyItem] = Field(default_factory=list)
+    latest_briefing: DailyBriefingItem | None = None
+    recent_briefings: list[DailyBriefingItem] = Field(default_factory=list)
+    latest_alert: AlertEventItem | None = None
+    recent_alerts: list[AlertEventItem] = Field(default_factory=list)
+
+
+class AlertEventItem(BaseModel):
+    alert_id: int
+    event_type: str
+    created_at: str
+    station_name: str
+    source: str
+    latitude: float
+    longitude: float
+    severity: str
+    message: str
+    payload: dict[str, Any]
+
+
+class DailyBriefingItem(BaseModel):
+    briefing_id: int
+    briefing_date: str
+    generated_at: str
+    trigger_source: str
+    model_name: str
+    status: str
+    title: str
+    briefing_text: str
+    raw: dict[str, Any]
+
+
+class DailyBriefingResponse(BaseModel):
+    latest_briefing: DailyBriefingItem | None = None
+    recent_briefings: list[DailyBriefingItem] = Field(default_factory=list)

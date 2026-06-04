@@ -189,15 +189,12 @@
         <div class="panel-header">
           <div>
             <h2>AI Research Panel</h2>
-            <p>Ask maritime safety questions with Gemini.</p>
+            <p>Ask maritime safety questions with Gemini. The backend reads its API key from server environment configuration.</p>
           </div>
         </div>
         <div class="ai-inputs">
           <textarea id="aiQuery" rows="4" placeholder="Ask about rogue waves, maritime safety, or shipping hazards..."></textarea>
-          <div class="ai-key-row">
-            <input id="geminiKey" type="password" placeholder="Gemini API key">
-            <button id="aiSearchBtn" class="accent-btn" type="button">Search</button>
-          </div>
+          <button id="aiSearchBtn" class="accent-btn" type="button">Search</button>
           <div class="suggestions" id="suggestions">
             <button class="chip" type="button">What causes rogue waves in the North Atlantic?</button>
             <button class="chip" type="button">How do shipping operators respond to rogue wave alerts?</button>

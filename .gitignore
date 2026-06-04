@@ -9,6 +9,8 @@ venv/
 
 # Local dependencies and runtime artifacts
 .python_pkgs/
+backend/runtime/
+runtime/
 backend/server.out.log
 backend/server.err.log
 *.log
@@ -16,6 +18,7 @@ backend/server.err.log
 # Environment files
 .env
 .env.*
+!.env.example
 
 # Node / frontend tooling
 node_modules/
@@ -27,4 +30,3 @@ build/
 Thumbs.db
 .idea/
 .vscode/
-

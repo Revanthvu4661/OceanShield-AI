@@ -23,7 +23,7 @@ Open `frontend/index.html` directly, or let FastAPI serve it at `http://localhos
 - `GET /api/health` - Model status and performance metrics
 
 ### Gemini Setup
-Get a free API key from [Google AI Studio](https://aistudio.google.com), then enter it in the AI Research panel.
+Set `GEMINI_API_KEY` in the backend environment before starting the service. For local development, copy [.env.example](D:/ocean/.env.example) to `.env`, fill in your values, and keep the real `.env` file out of git.
 
 ## Model Details
 
@@ -45,3 +45,5 @@ The app will be available at `http://localhost:8000`.
 ## Render Deployment
 
 Use the root `Dockerfile` and set the service to listen on the platform-provided `PORT` environment variable. Render will automatically provide `PORT` for the web service.
+
+Set `GEMINI_API_KEY` in Render's environment variables. The browser no longer collects or stores API keys.
