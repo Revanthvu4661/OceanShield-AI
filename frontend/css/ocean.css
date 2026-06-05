@@ -786,6 +786,10 @@ button, input, select, textarea { font: inherit; }
   background: rgba(5, 13, 26, 0.75);
   backdrop-filter: blur(8px);
 }
+
+.hidden {
+  display: none !important;
+}
 .loading-card {
   padding: 24px 28px;
   border-radius: 24px;
