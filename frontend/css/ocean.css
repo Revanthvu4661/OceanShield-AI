@@ -408,31 +408,31 @@ button, input, select, textarea { font: inherit; }
 .ocean-form {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 .form-group {
   display: grid;
-  gap: 10px;
-  padding: 16px;
-  border-radius: 20px;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(0, 200, 232, 0.12);
 }
 .form-group h3 {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   color: rgba(0, 200, 232, 0.95);
-  font-size: 1.12rem;
+  font-size: 1.02rem;
 }
 .form-group label {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   color: rgba(215, 247, 255, 0.92);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 .form-group input, .form-group select, textarea {
   width: 100%;
-  border-radius: 14px;
-  padding: 12px 14px;
+  border-radius: 13px;
+  padding: 10px 12px;
   color: var(--text-bright);
   border: 1px solid rgba(0, 200, 232, 0.16);
   background: rgba(3, 8, 16, 0.9);
