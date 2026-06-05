@@ -17,7 +17,7 @@ export function initMap() {
     worldCopyJump: true,
     preferCanvas: true,
   }).setView([10, 0], 2);
-  window.L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_matter/{z}/{x}/{y}{r}.png", {
+  window.L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     attribution: "&copy; OpenStreetMap &copy; CARTO",
   }).addTo(map);
   map.getContainer().style.cursor = "crosshair";
