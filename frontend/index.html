@@ -6,20 +6,21 @@
   <title>OceanShield AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="/static/css/ocean.css">
 </head>
 <body>
   <div class="bg-orb orb-a"></div>
   <div class="bg-orb orb-b"></div>
+  <div class="bg-orb orb-c"></div>
 
   <header class="topbar glass">
     <div class="brand">
       <div class="brand-mark">🌊</div>
       <div>
         <div class="brand-title">OceanShield AI</div>
-        <div class="brand-subtitle">Intelligent rogue wave risk assessment</div>
+        <div class="brand-subtitle">Autonomous rogue-wave risk intelligence</div>
       </div>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
@@ -32,110 +33,184 @@
     <div class="health-pill" id="healthPill">Loading model...</div>
   </header>
 
-  <section class="wave-banner">
-    <div class="wave wave-back"></div>
-    <div class="wave wave-front"></div>
-    <div class="hero-copy">
-      <span class="eyebrow">Maritime AI Safety Platform</span>
-      <h1>Detect potential rogue-wave risk before it builds.</h1>
-      <p>Combine wave state, wind forcing, tide context, and explainable ML to assess marine hazard in seconds.</p>
-    </div>
-  </section>
-
   <main class="page-shell">
-    <section class="grid grid-hero" id="dashboardSection">
-      <article class="panel glass form-panel" id="predictSection">
-        <div class="panel-header">
-          <div>
-            <h2>Ocean Conditions</h2>
-            <p>Start with a realistic scenario or load an extreme event.</p>
-          </div>
-          <div class="button-row">
-            <button class="ghost-btn" id="safeScenarioBtn" type="button">Load Safe Scenario</button>
-            <button class="accent-btn" id="highRiskScenarioBtn" type="button">Load High-Risk Scenario</button>
-          </div>
+    <section class="hero-shell">
+      <div class="hero-copy">
+        <span class="eyebrow">Maritime AI Safety Platform</span>
+        <h1>Detect potential rogue-wave risk before it builds.</h1>
+        <p>
+          OceanShield combines wave state, wind forcing, tide context, route intelligence, and explainable machine learning
+          to assess marine hazard in seconds.
+        </p>
+        <div class="hero-actions">
+          <a class="accent-btn" href="#predictSection">Launch Prediction</a>
+          <a class="ghost-btn" href="#aiSection">Open AI Research</a>
         </div>
-        <form id="oceanForm" class="ocean-form">
-          <div class="form-group">
-            <h3>Wave Conditions</h3>
-            <label>Significant Wave Height (sigheight)<input name="sigheight" type="number" step="0.1" value="1.5"></label>
-            <label>Swell Height (swellheight)<input name="swellheight" type="number" step="0.1" value="1.2"></label>
-            <label>Swell Direction (swelldir)<input name="swelldir" type="number" step="1" value="180"></label>
-            <label>Wave Period (period)<input name="period" type="number" step="0.1" value="10"></label>
-          </div>
-          <div class="form-group">
-            <h3>Wind Conditions</h3>
-            <label>Wind Speed (windspeed)<input name="windspeed" type="number" step="0.1" value="15"></label>
-            <label>Wind Direction (winddirdegree)<input name="winddirdegree" type="number" step="1" value="225"></label>
-            <label>Wind Gust (windgust)<input name="windgust" type="number" step="0.1" value="22"></label>
-          </div>
-          <div class="form-group">
-            <h3>Atmospheric</h3>
-            <label>Pressure (pressure)<input name="pressure" type="number" step="0.1" value="1013"></label>
-            <label>Humidity (humidity)<input name="humidity" type="number" step="1" value="75"></label>
-            <label>Cloud Cover (cloudcover)<input name="cloudcover" type="number" step="1" value="60"></label>
-            <label>Precipitation (precipitation)<input name="precipitation" type="number" step="0.1" value="0.5"></label>
-            <label>Dewpoint (dewpoint)<input name="dewpoint" type="number" step="0.1" value="18"></label>
-          </div>
-          <div class="form-group">
-            <h3>Temperature</h3>
-            <label>Max Temp (maxtemp)<input name="maxtemp" type="number" step="0.1" value="28"></label>
-            <label>Min Temp (mintemp)<input name="mintemp" type="number" step="0.1" value="22"></label>
-            <label>Water Temp (watertemp)<input name="watertemp" type="number" step="0.1" value="24"></label>
-          </div>
-          <div class="form-group">
-            <h3>Tide & Lunar</h3>
-            <label>Tide Height Mean (tide_height_mean)<input name="tide_height_mean" type="number" step="0.1" value="0.5"></label>
-            <label>Tide Height Max (tide_height_max)<input name="tide_height_max" type="number" step="0.1" value="1.2"></label>
-            <label>Tide Height Min (tide_height_min)<input name="tide_height_min" type="number" step="0.1" value="-0.2"></label>
-            <label>Moon Illumination (moon_illumination)<input name="moon_illumination" type="number" step="1" value="70"></label>
-            <label>Moon Phase
-              <select name="moon_phase">
-                <option>New Moon</option>
-                <option>Waxing Crescent</option>
-                <option>First Quarter</option>
-                <option>Waxing Gibbous</option>
-                <option selected>Full Moon</option>
-                <option>Waning Gibbous</option>
-                <option>Last Quarter</option>
-                <option>Waning Crescent</option>
-              </select>
-            </label>
-          </div>
-          <div class="form-group">
-            <h3>Location</h3>
-            <label>Latitude (latitude)<input name="latitude" type="number" step="0.01" value="20"></label>
-            <label>Longitude (longitude)<input name="longitude" type="number" step="0.01" value="72"></label>
-            <label>Hour (hour)<input name="hour" type="number" step="1" value="14"></label>
-            <label>Beach/Station ID (idbeach)<input name="idbeach" type="text" value="1"></label>
-            <label>Tide Events (tide_events)<input name="tide_events" type="number" step="1" value="4"></label>
-            <label>High Tide Count (high_tide_count)<input name="high_tide_count" type="number" step="1" value="2"></label>
-            <label>Low Tide Count (low_tide_count)<input name="low_tide_count" type="number" step="1" value="2"></label>
-            <label>Tide Height Range (tide_height_range)<input name="tide_height_range" type="number" step="0.1" value="1"></label>
-          </div>
-        </form>
-        <div class="form-actions">
-          <button id="analyzeBtn" class="accent-btn large" type="button">Analyze Ocean Risk</button>
+        <div class="hero-points">
+          <span>SAFE 0-29</span>
+          <span>CAUTION 30-64</span>
+          <span>HIGH RISK 65+</span>
         </div>
-      </article>
+      </div>
 
-      <article class="panel glass map-panel">
-        <div class="panel-header">
+      <aside class="hero-panel glass">
+        <div class="hero-panel-head">
           <div>
-            <h2>Risk Map</h2>
-            <p>Colored markers show each prediction’s risk level.</p>
+            <span class="section-kicker">Live Model Brief</span>
+            <h2 id="heroModelName">XGBoost</h2>
+          </div>
+          <div class="hero-pill">OceanShield Core</div>
+        </div>
+
+        <div class="telemetry-grid">
+          <div class="telemetry-card">
+            <span>Accuracy</span>
+            <strong id="heroAccuracyValue">--</strong>
+          </div>
+          <div class="telemetry-card">
+            <span>Precision</span>
+            <strong id="heroPrecisionValue">--</strong>
+          </div>
+          <div class="telemetry-card">
+            <span>Recall</span>
+            <strong id="heroRecallValue">--</strong>
+          </div>
+          <div class="telemetry-card">
+            <span>ROC AUC</span>
+            <strong id="heroRocValue">--</strong>
           </div>
         </div>
-        <div id="riskMap" class="map-canvas"></div>
+
+        <div class="hero-status">
+          <span id="heroSupportValue">TP / FN will appear here</span>
+        </div>
+        <p class="hero-meta" id="heroMetaCopy">Bands: SAFE 0-29, CAUTION 30-64, HIGH RISK 65+.</p>
+        <div class="hero-threshold" id="heroThresholdValue">Model meta route ready.</div>
+      </aside>
+    </section>
+
+    <section class="signal-strip glass">
+      <article class="signal-card">
+        <span class="signal-label">Operational stance</span>
+        <strong>Predictive monitoring</strong>
+        <p>AI-assisted marine hazard detection and route guidance.</p>
+      </article>
+      <article class="signal-card">
+        <span class="signal-label">Model posture</span>
+        <strong id="heroModelBadge">XGBoost</strong>
+        <p>Runtime metrics are loaded from the trained model metadata.</p>
+      </article>
+      <article class="signal-card">
+        <span class="signal-label">Risk bands</span>
+        <strong>SAFE / CAUTION / HIGH RISK</strong>
+        <p>Scores are mapped to a 0-100 operational scale.</p>
+      </article>
+      <article class="signal-card">
+        <span class="signal-label">AI research</span>
+        <strong>Gemini 2.5 Flash</strong>
+        <p>Backend-only key handling keeps secrets out of the browser.</p>
       </article>
     </section>
 
-    <section class="grid grid-secondary">
+    <section class="panel glass section-panel" id="dashboardSection">
+      <div class="panel-header">
+        <div>
+          <span class="section-kicker">Live dashboard</span>
+          <h2>Risk Map</h2>
+          <p>Colored markers show each prediction’s risk level. Hover the map to inspect coordinates.</p>
+        </div>
+        <div class="button-row">
+          <span class="legend-chip safe">SAFE</span>
+          <span class="legend-chip caution">CAUTION</span>
+          <span class="legend-chip high">HIGH RISK</span>
+        </div>
+      </div>
+      <div class="map-shell">
+        <div id="riskMap" class="map-canvas"></div>
+      </div>
+    </section>
+
+    <section class="panel glass section-panel" id="predictSection">
+      <div class="panel-header">
+        <div>
+          <span class="section-kicker">Risk engine</span>
+          <h2>Ocean Conditions</h2>
+          <p>Start with a realistic scenario or jump directly to a storm or rogue-event profile.</p>
+        </div>
+        <div class="button-row">
+          <button class="ghost-btn" type="button" data-preset="calm">Calm Sea</button>
+          <button class="ghost-btn" type="button" data-preset="moderate">Moderate Swell</button>
+          <button class="accent-btn" type="button" data-preset="storm">Storm Conditions</button>
+          <button class="accent-btn" type="button" data-preset="rogue">Rogue Event</button>
+        </div>
+      </div>
+
+      <form id="oceanForm" class="ocean-form">
+        <section class="form-group">
+          <h3>Wave Conditions</h3>
+          <label>Significant Wave Height (sigheight)<input name="sigheight" type="number" step="0.1" value="1.5"></label>
+          <label>Swell Height (swellheight)<input name="swellheight" type="number" step="0.1" value="1.2"></label>
+          <label>Swell Direction (swelldir)<input name="swelldir" type="number" step="1" value="180"></label>
+          <label>Wave Period (period)<input name="period" type="number" step="0.1" value="10"></label>
+        </section>
+
+        <section class="form-group">
+          <h3>Wind & Atmosphere</h3>
+          <label>Wind Speed (windspeed)<input name="windspeed" type="number" step="0.1" value="15"></label>
+          <label>Wind Direction (winddirdegree)<input name="winddirdegree" type="number" step="1" value="225"></label>
+          <label>Wind Gust (windgust)<input name="windgust" type="number" step="0.1" value="22"></label>
+          <label>Pressure (pressure)<input name="pressure" type="number" step="0.1" value="1013"></label>
+          <label>Humidity (humidity)<input name="humidity" type="number" step="1" value="75"></label>
+          <label>Cloud Cover (cloudcover)<input name="cloudcover" type="number" step="1" value="60"></label>
+          <label>Precipitation (precipitation)<input name="precipitation" type="number" step="0.1" value="0.5"></label>
+          <label>Dewpoint (dewpoint)<input name="dewpoint" type="number" step="0.1" value="18"></label>
+        </section>
+
+        <section class="form-group">
+          <h3>Tide, Lunar & Location</h3>
+          <label>Water Temp (watertemp)<input name="watertemp" type="number" step="0.1" value="24"></label>
+          <label>Max Temp (maxtemp)<input name="maxtemp" type="number" step="0.1" value="28"></label>
+          <label>Min Temp (mintemp)<input name="mintemp" type="number" step="0.1" value="22"></label>
+          <label>Moon Illumination (moon_illumination)<input name="moon_illumination" type="number" step="1" value="70"></label>
+          <label>Moon Phase
+            <select name="moon_phase">
+              <option>New Moon</option>
+              <option>Waxing Crescent</option>
+              <option>First Quarter</option>
+              <option>Waxing Gibbous</option>
+              <option selected>Full Moon</option>
+              <option>Waning Gibbous</option>
+              <option>Last Quarter</option>
+              <option>Waning Crescent</option>
+            </select>
+          </label>
+          <label>Tide Events (tide_events)<input name="tide_events" type="number" step="1" value="4"></label>
+          <label>Tide Height Mean (tide_height_mean)<input name="tide_height_mean" type="number" step="0.1" value="0.5"></label>
+          <label>Tide Height Max (tide_height_max)<input name="tide_height_max" type="number" step="0.1" value="1.2"></label>
+          <label>Tide Height Min (tide_height_min)<input name="tide_height_min" type="number" step="0.1" value="-0.2"></label>
+          <label>Tide Height Range (tide_height_range)<input name="tide_height_range" type="number" step="0.1" value="1.4"></label>
+          <label>High Tide Count (high_tide_count)<input name="high_tide_count" type="number" step="1" value="2"></label>
+          <label>Low Tide Count (low_tide_count)<input name="low_tide_count" type="number" step="1" value="2"></label>
+          <label>Latitude (latitude)<input name="latitude" type="number" step="0.01" value="20"></label>
+          <label>Longitude (longitude)<input name="longitude" type="number" step="0.01" value="72"></label>
+          <label>Hour (hour)<input name="hour" type="number" step="1" value="14"></label>
+          <label>Beach/Station ID (idbeach)<input name="idbeach" type="text" value="1"></label>
+        </section>
+      </form>
+
+      <div class="form-actions">
+        <button id="analyzeBtn" class="accent-btn large" type="button">Analyze Ocean Risk</button>
+        <p class="form-note">The score is converted to a 0-100 risk band and stored in the prediction history feed.</p>
+      </div>
+    </section>
+
+    <section class="analytics-grid">
       <article class="panel glass gauge-panel" id="gaugePanel">
         <div class="panel-header">
           <div>
-            <h2>Risk Score</h2>
-            <p>Probability mapped to a 0-100 risk score.</p>
+            <span class="section-kicker">Live score</span>
+            <h2>Risk Gauge</h2>
+            <p>Probability mapped to the operational 0-100 scale.</p>
           </div>
         </div>
         <div class="gauge-wrap">
@@ -152,16 +227,18 @@
       <article class="panel glass factor-panel">
         <div class="panel-header">
           <div>
+            <span class="section-kicker">Explainability</span>
             <h2>Top Factors</h2>
             <p>Feature signals driving the decision.</p>
           </div>
         </div>
-        <canvas id="factorsChart" height="240"></canvas>
+        <div id="topFactorsList" class="factor-list"></div>
       </article>
 
       <article class="panel glass history-panel">
         <div class="panel-header">
           <div>
+            <span class="section-kicker">Memory</span>
             <h2>Prediction History</h2>
             <p>Latest assessments from the in-memory feed.</p>
           </div>
@@ -170,50 +247,50 @@
       </article>
     </section>
 
-    <section class="grid grid-performance" id="performanceSection">
-      <article class="panel glass performance-panel">
-        <div class="panel-header">
-          <div>
-            <h2>Model Performance</h2>
-            <p>Metrics loaded from the trained XGBoost model metadata.</p>
-          </div>
+    <section class="panel glass section-panel" id="performanceSection">
+      <div class="panel-header">
+        <div>
+          <span class="section-kicker">Model performance</span>
+          <h2>Performance Dashboard</h2>
+          <p>Metrics loaded from the trained XGBoost model metadata.</p>
         </div>
-        <div class="metric-grid" id="metricGrid"></div>
-        <div class="roc-banner" id="rocBanner">ROC-AUC: 99.92% - Near-perfect discrimination</div>
-        <div class="confusion-matrix" id="confusionMatrix"></div>
-      </article>
+      </div>
+      <div class="metric-grid" id="metricGrid"></div>
+      <div class="roc-banner" id="rocBanner">ROC-AUC banner will appear here.</div>
+      <div class="confusion-matrix" id="confusionMatrix"></div>
     </section>
 
-    <section class="grid grid-ai" id="aiSection">
-      <article class="panel glass ai-panel">
-        <div class="panel-header">
-          <div>
-            <h2>AI Research Panel</h2>
-            <p>Ask maritime safety questions with Gemini. The backend reads its API key from server environment configuration.</p>
-          </div>
+    <section class="panel glass section-panel" id="aiSection">
+      <div class="panel-header">
+        <div>
+          <span class="section-kicker">Autonomous research</span>
+          <h2>AI Research Panel</h2>
+          <p>Ask maritime safety questions with Gemini. The backend reads its API key from server environment configuration.</p>
         </div>
-        <div class="ai-inputs">
-          <textarea id="aiQuery" rows="4" placeholder="Ask about rogue waves, maritime safety, or shipping hazards..."></textarea>
-          <button id="aiSearchBtn" class="accent-btn" type="button">Search</button>
-          <div class="suggestions" id="suggestions">
-            <button class="chip" type="button">What causes rogue waves in the North Atlantic?</button>
-            <button class="chip" type="button">How do shipping operators respond to rogue wave alerts?</button>
-            <button class="chip" type="button">What ocean conditions increase rogue wave probability?</button>
-            <button class="chip" type="button">Explain the Benjamin-Feir instability mechanism</button>
-          </div>
+      </div>
+
+      <div class="ai-inputs">
+        <textarea id="aiQuery" rows="5" placeholder="Ask about rogue waves, maritime safety, route risk, or shipping hazards..."></textarea>
+        <button id="aiSearchBtn" class="accent-btn large" type="button">Search</button>
+        <div class="suggestions" id="suggestions">
+          <button class="chip" type="button">What causes rogue waves in the North Atlantic?</button>
+          <button class="chip" type="button">How do shipping operators respond to rogue wave alerts?</button>
+          <button class="chip" type="button">What ocean conditions increase rogue wave probability?</button>
+          <button class="chip" type="button">Explain the Benjamin-Feir instability mechanism</button>
         </div>
-        <div class="ai-answer" id="aiAnswer">
-          <div class="empty-state">
-            Enter a question to explore maritime risk science.
-          </div>
-        </div>
-      </article>
+      </div>
+
+      <div class="ai-answer" id="aiAnswer">
+        <div class="empty-state">Enter a question to explore maritime risk science.</div>
+      </div>
     </section>
   </main>
 
   <div id="loadingOverlay" class="loading-overlay hidden">
-    <div class="wave-spinner"></div>
-    <div class="loading-text">Listening for signals from the deep...</div>
+    <div class="loading-card glass">
+      <div class="wave-spinner"></div>
+      <div class="loading-text">Listening for signals from the deep...</div>
+    </div>
   </div>
 
   <div id="toastContainer" class="toast-container"></div>
@@ -228,7 +305,6 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="/static/js/app.js"></script>
 </body>
 </html>

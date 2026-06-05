@@ -10,10 +10,10 @@ from schemas import OceanInput, PredictionFactor
 
 
 def risk_level_from_score(score: float) -> str:
-    if score <= 30:
+    if score < 30:
         return "SAFE"
-    if score <= 65:
-        return "ELEVATED"
+    if score < 65:
+        return "CAUTION"
     return "HIGH RISK"
 
 

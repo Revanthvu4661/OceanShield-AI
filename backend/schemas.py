@@ -12,17 +12,17 @@ class OceanInput(BaseModel):
     humidity: float
     pressure: float = 1013.25
     cloudcover: float = 50.0
-    dewpoint: float
+    dewpoint: float = 18.0
     windgust: float
     sigheight: float
     swellheight: float
     swelldir: float
     period: float
-    watertemp: float
+    watertemp: float = 24.0
     moon_illumination: float = 50.0
     moon_phase: str = "Full Moon"
-    maxtemp: float
-    mintemp: float
+    maxtemp: float = 28.0
+    mintemp: float = 22.0
     tide_events: int = 4
     tide_height_mean: float = 0.5
     tide_height_max: float = 1.0
@@ -88,6 +88,18 @@ class HealthResponse(BaseModel):
     top_shap_features: list[dict[str, Any]]
     training_metadata: dict[str, Any]
     handoff_notes: list[str]
+
+
+class ModelMetaResponse(BaseModel):
+    accuracy: float
+    precision: float
+    recall: float
+    f1: float
+    roc_auc: float
+    tp: int
+    fp: int
+    fn: int
+    tn: int
 
 
 class AISearchRequest(BaseModel):

@@ -231,7 +231,7 @@ def _evaluate_route(route_name: str, waypoints: list[tuple[float, float]], risk_
         "average_risk_score": round(average_risk, 2),
         "peak_risk_score": round(peak_risk, 2),
         "high_risk_waypoints": high_risk_waypoints,
-        "status": "HIGH RISK" if peak_risk >= risk_threshold else "ELEVATED" if average_risk >= 35 else "SAFE",
+        "status": "HIGH RISK" if peak_risk >= risk_threshold else "CAUTION" if average_risk >= 35 else "SAFE",
         "waypoints": evaluations,
     }
 

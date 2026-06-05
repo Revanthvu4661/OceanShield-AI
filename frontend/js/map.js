@@ -5,7 +5,7 @@ const markers = [];
 
 function riskColor(level) {
   if (level === "HIGH RISK") return "#ff4757";
-  if (level === "ELEVATED") return "#ffb830";
+  if (level === "CAUTION" || level === "ELEVATED") return "#f59e0b";
   return "#00d68f";
 }
 
@@ -16,8 +16,8 @@ export function initMap() {
     zoomControl: true,
     worldCopyJump: true,
     preferCanvas: true,
-  }).setView([18, 0], 2);
-  window.L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+  }).setView([10, 0], 2);
+  window.L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_matter/{z}/{x}/{y}{r}.png", {
     attribution: "&copy; OpenStreetMap &copy; CARTO",
   }).addTo(map);
   map.getContainer().style.cursor = "crosshair";
@@ -49,7 +49,7 @@ function attachCursorOverlay() {
     const point = map.latLngToContainerPoint(event.latlng);
     crosshairX.style.left = `${point.x}px`;
     crosshairY.style.top = `${point.y}px`;
-    pill.textContent = `Lat ${event.latlng.lat.toFixed(4)} | Lon ${event.latlng.lng.toFixed(4)}`;
+    pill.textContent = `Lat ${event.latlng.lat.toFixed(4)}  •  Lon ${event.latlng.lng.toFixed(4)}`;
     coordOverlay.classList.add("visible");
   };
 

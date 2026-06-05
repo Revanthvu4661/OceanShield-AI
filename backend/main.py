@@ -25,6 +25,7 @@ from routes.briefings import router as briefings_router
 from routes.background import router as background_router
 from routes.explain import router as explain_router
 from routes.health import router as health_router
+from routes.model_meta import router as model_meta_router
 from routes.predict import router as predict_router
 from settings import FRONTEND_DIR
 from storage import initialize_background_store
@@ -48,6 +49,7 @@ app.include_router(health_router, prefix="/api")
 app.include_router(predict_router, prefix="/api")
 app.include_router(explain_router, prefix="/api")
 app.include_router(ai_search_router, prefix="/api")
+app.include_router(model_meta_router, prefix="/api")
 app.include_router(alerts_router, prefix="/api")
 app.include_router(briefings_router, prefix="/api")
 app.include_router(background_router, prefix="/api")
